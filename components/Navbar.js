@@ -1,7 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
-import { css } from "@emotion/react";
+import React, {useContext, useEffect, useState} from "react";
+import {css} from "@emotion/react";
 // import Products from '../products';
 import Link from "next/link";
+import {dietContext} from "../pages/_app";
+
 
 // import OwlCarousel from 'react-owl-carousel';
 // import 'owl.carousel/dist/assets/owl.carousel.css';
@@ -90,46 +92,48 @@ const header = css`
 `;
 
 export default function NavBar() {
-  return (
-    <div>
-      <section css={topbar}>
-        <a href="index.html">
-          <i className="fas fa-hiking" /> Hiking shop
-        </a>
-      </section>
+    const cartNumber = useContext(dietContext);
 
-      <nav css={nav}>
-        <ul>
-          <li>
-            <Link href="/">
-              <a>Home</a>
-            </Link>
-          </li>
+    return (
+        <div>
+            <section css={topbar}>
+                <a href="index.html">
+                    <i className="fas fa-hiking"/> Hiking shop
+                </a>
+            </section>
 
-          <li>
-            <Link href="/about">
-              <a>About</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/animals">
-              <a>Products</a>
-            </Link>
-          </li>
-          <Link href="/cart">
-            <a data-cy="shopping-cart">
-              <img
-                className="shoppingCartStyle"
-                src="/shopping_cart.png"
-                alt="shopping cart"
-              />
-              <span>0</span>
-            </a>
-          </Link>
-        </ul>
-      </nav>
-    </div>
-  );
+            <nav css={nav}>
+                <ul>
+                    <li>
+                        <Link href="/">
+                            <a>Home</a>
+                        </Link>
+                    </li>
+
+                    <li>
+                        <Link href="/about">
+                            <a>About</a>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href="/animals">
+                            <a>Products</a>
+                        </Link>
+                    </li>
+                    <Link href="/cart">
+                        <a data-cy="shopping-cart">
+                            <img
+                                className="shoppingCartStyle"
+                                src="/shopping_cart.png"
+                                alt="shopping cart"
+                            />
+                            <span>{cartNumber}</span>
+                        </a>
+                    </Link>
+                </ul>
+            </nav>
+        </div>
+    );
 }
 
 // export default NavBar;
